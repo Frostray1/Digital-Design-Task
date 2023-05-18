@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Моя страница</title>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<header class="header">
+			<nav class="menu">
+				<ul class="menu__list">
+					<li class="menu__item">
+						<a href="#category1" class="menu__link">Одежда</a>
+					</li>
+					<li class="menu__item">
+						<a href="#category2" class="menu__link">Обувь</a>
+					</li>
+					<li class="menu__item">
+						<a href="#category3" class="menu__link">Аксессуары</a>
+					</li>
+				</ul>
+			</nav>
+			<button id="theme-toggle" class="header__theme-toggle">
+				Сменить тему
+			</button>
+		</header>
+
+		<button class="back-to-top" id="button-back-to-top">
+			Вернуться наверх
+		</button>
+		<div class="container">
+			<section id="category1" class="category">
+				<h1 class="category__title">Одежда</h1>
+				<div class="category__container" id="clothes-container">
+					<!-- Карточки товаров будут добавлены с помощью JavaScript -->
+				</div>
+			</section>
+		</div>
+		<div class="container">
+			<section id="category2" class="category">
+				<h1 class="category__title">Обувь</h1>
+				<div class="category__container" id="shoes-container">
+					<!-- Карточки товаров будут добавлены с помощью JavaScript -->
+				</div>
+			</section>
+		</div>
+		<div class="container">
+			<section id="category3" class="category">
+				<h1 class="category__title">Аксессуары</h1>
+				<div class="category__container" id="access-container">
+					<!-- Карточки товаров будут добавлены с помощью JavaScript -->
+				</div>
+			</section>
+		</div>
+
+        
+		<!--   
+  <footer class="footer">
+    <ul class="footer__list">
+      <li class="footer__item"><a href="#category1" class="footer__link">Категория 1</a></li>
+      <li class="footer__item"><a href="#category2" class="footer__link">Категория 2</a></li>
+      <li class="footer__item"><a href="#category3" class="footer__link">Категория 3</a></li>
+    </ul>
+  </footer> -->
+
+		<!-- <div id="purchase-form" style="display: none;" class="purchase-form">
+    <form onsubmit="return buyProduct()" class="purchase-form__form">
+      <label for="quantity" class="purchase-form__label">Количество:</label>
+      <input type="number" id="quantity" min="1" required class="purchase-form__input">
+      
+      <label class="purchase-form__label">Цвет:</label>
+      <input type="radio" name="color" value="red" required class="purchase-form__radio"> Красный
+      <input type="radio" name="color" value="green" required class="purchase-form__radio"> Зеленый
+      <input type="radio" name="color" value="blue" required class="purchase-form__radio"> Синий
+      
+      <label for="comment" class="purchase-form__label">Комментарий:</label>
+      <textarea id="comment" maxlength="2000" class="purchase-form__textarea"></textarea>
+      
+      <button type="submit" class="purchase-form__submit">Купить</button>
+      <button type="button" onclick="closeForm()" class="purchase-form__close">Закрыть</button>
+    </form>
+  </div> -->
+
+		<script type="module" src="script.js"></script>
+	</body>
+</html>
