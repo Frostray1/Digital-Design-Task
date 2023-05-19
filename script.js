@@ -46,25 +46,17 @@ function formatDate(dateString) {
   return date.toLocaleDateString('ru-RU', options);
 }
 
-// document.getElementById('product1-date').textContent = formatDate('2023-05-18');
-// document.getElementById('product2-date').textContent = formatDate('2021-12-15');
-// document.getElementById('product3-date').textContent = formatDate('2023-05-18');
 
 
 
 
 
-// Массив с информацией о товарах
 import products from './products.js';
-// console.log(products)
 
-// Функция для создания карточек товаров на основе массива данных
 function createProductCards() {
-	const container = document.getElementById('clothes-container');
 
 	products.forEach((product) => {
        
-		// Создаем элементы карточки товара
 		const card = document.createElement('div');
 		card.classList.add('product-card');
 
@@ -86,18 +78,15 @@ function createProductCards() {
 		button.classList.add('product-card__button');
 		button.onclick = openForm;
 
-		// Добавляем созданные элементы в карточку товара
 		card.appendChild(image);
 		card.appendChild(title);
 		card.appendChild(date);
 		card.appendChild(button);
 
-		// Добавляем карточку товара в контейнер
-		// container.appendChild(card);
+	
         document.getElementById(`${product.type}-container`).appendChild(card)
 	});
 }
 
-// Вызываем функцию для создания карточек товаров
 createProductCards();
 

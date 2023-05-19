@@ -88,7 +88,7 @@ h1 {
 	width: 200px;
     border: 1px solid rgb(221, 223, 235);
     padding: 0.5em;
-    height: 410px;/*Убрать адаптивный сделать*/
+    height: 450px;
 	margin-right: 20px;
 	margin-bottom: 20px;
     border-radius:5px;
@@ -98,6 +98,20 @@ h1 {
 	width: 100%;
 	height: 70%;
     object-fit: scale-down;
+}
+.product-card__button{
+    border:1px solid rgb(221, 223, 235);
+	background: transparent;
+	color: rgb(46, 53, 84);
+	border-radius:5px;
+	padding: 0.5em;
+	cursor: pointer;
+    float: right;
+    transition: color,border 0.3s ease;
+}
+.product-card__button:hover{
+    color: red;
+    border:1px solid red;
 }
 
 /* Темная тема */
@@ -118,6 +132,10 @@ h1 {
   }
 
 .dark .back-to-top {
-	/* background-color: #fff; */
 	color: #fff;
 }
+.dark .product-card__button{
+	color: #fff;
+}
+
+
