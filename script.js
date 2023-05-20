@@ -47,6 +47,29 @@ function formatDate(dateString) {
 }
 
 
+const scrollLinks = document.querySelectorAll('.scroll-link');
+
+scrollLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault(); 
+    const headerHeight = 100;
+    const targetId = link.getAttribute('href'); 
+    const targetElement = document.querySelector(targetId); 
+
+    if (targetElement) {
+      const offsetTop = targetElement.offsetTop;
+      const windowHeight = window.innerHeight;
+      console.log(offsetTop)
+      const scrollTo = offsetTop-headerHeight;
+
+      window.scrollTo({
+        top: scrollTo,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+
 
 
 
