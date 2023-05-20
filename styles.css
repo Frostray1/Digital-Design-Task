@@ -114,6 +114,17 @@ h1 {
     border:1px solid red;
 }
 
+
+.footer{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 20px;
+	border-top: 1px solid rgb(221, 223, 235);
+	background-color: rgb(245, 247, 249);
+}
+
 /* Темная тема */
 .dark {
 	background-color: #333;

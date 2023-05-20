@@ -58,8 +58,6 @@ scrollLinks.forEach(link => {
 
     if (targetElement) {
       const offsetTop = targetElement.offsetTop;
-      const windowHeight = window.innerHeight;
-      console.log(offsetTop)
       const scrollTo = offsetTop-headerHeight;
 
       window.scrollTo({
