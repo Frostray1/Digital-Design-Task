@@ -1,30 +1,46 @@
+import products from './products.js';
+
 window.addEventListener('scroll', toggleBackToTopButton);
 document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
 document.getElementById('button-back-to-top').addEventListener('click', scrollToTop);
+document.getElementById('purchase-form__submit').addEventListener('click', buyProduct);
+document.getElementById('purchase-form__close').addEventListener('click', closeForm);
+const scrollLinks = document.querySelectorAll('.scroll-link');
 
 function scrollToTop() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  }
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
 
+scrollLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const headerHeight = 100;
+    const targetId = link.getAttribute('href');
+    const targetElement = document.querySelector(targetId);
+
+    if (targetElement) {
+      const offsetTop = targetElement.offsetTop;
+      const scrollTo = offsetTop - headerHeight;
+
+      window.scrollTo({
+        top: scrollTo,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
 
 function toggleBackToTopButton() {
   const button = document.querySelector('.back-to-top');
-  if (window.scrollY > 0) {
-    button.style.display = 'block';
-  } else {
-    button.style.display = 'none';
-  }
+  button.style.display = window.scrollY > 0 ? 'block' : 'none';
 }
 
 function toggleTheme() {
-  const body = document.body;
-  body.classList.toggle('dark');
-}
-
-
+  document.body.classList.toggle('dark');
+} 
 
 function openForm() {
   document.getElementById('purchase-form').style.display = 'block';
@@ -40,74 +56,60 @@ function buyProduct() {
   return false;
 }
 
-function formatDate(dateString) {
-  const options = { weekday: 'long', week: 'numeric', month: 'long', year: 'numeric' };
-  const date = new Date(dateString);
-  return date.toLocaleDateString('ru-RU', options);
+function getDayInfo(dateString) {
+  const options = { weekday: 'long', week: 'numeric', month: 'long', year: 'numeric', day: 'numeric' };
+  const dateParts = dateString.split('.');
+  const day = parseInt(dateParts[0]);
+  const month = parseInt(dateParts[1]) - 1; 
+  const year = parseInt(dateParts[2]);
+  const date = new Date(year, month, day);
+  const formattedDate = date.toLocaleDateString('ru-RU', options);
+  
+  const weekNumber = Math.ceil(day / 7);
+  const formattedWeekNumber = weekNumber > 1 ? `${weekNumber} неделя` : '1 неделя';
+  
+  const dayInfo = formattedDate.replace(day.toString(), formattedWeekNumber);
+  return dayInfo;
 }
 
-
-const scrollLinks = document.querySelectorAll('.scroll-link');
-
-scrollLinks.forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault(); 
-    const headerHeight = 100;
-    const targetId = link.getAttribute('href'); 
-    const targetElement = document.querySelector(targetId); 
-
-    if (targetElement) {
-      const offsetTop = targetElement.offsetTop;
-      const scrollTo = offsetTop-headerHeight;
-
-      window.scrollTo({
-        top: scrollTo,
-        behavior: 'smooth'
-      });
-    }
-  });
-});
-
-
-
-
-
-import products from './products.js';
-
 function createProductCards() {
+  const productContainers = {};
 
-	products.forEach((product) => {
-       
-		const card = document.createElement('div');
-		card.classList.add('product-card');
+  products.forEach(product => {
+    const { type, imageSrc, title, date } = product;
 
-		const image = document.createElement('img');
-		image.src = product.imageSrc;
-		image.alt = product.title;
-		image.classList.add('product-card__image');
+    if (!productContainers[type]) {
+      productContainers[type] = document.getElementById(`${type}-container`);
+    }
 
-		const title = document.createElement('p');
-		title.textContent = product.title;
-		title.classList.add('product-card__title');
+    const card = document.createElement('div');
+    card.classList.add('product-card');
 
-		const date = document.createElement('p');
-		date.innerHTML = `Добавлено: <span>${formatDate(product.date)}</span>`;
-		date.classList.add('product-card__date');
+    const image = document.createElement('img');
+    image.src = imageSrc;
+    image.alt = title;
+    image.classList.add('product-card__image');
 
-		const button = document.createElement('button');
-		button.textContent = 'Купить';
-		button.classList.add('product-card__button');
-		button.onclick = openForm;
+    const titleElement = document.createElement('p');
+    titleElement.textContent = title;
+    titleElement.classList.add('product-card__title');
 
-		card.appendChild(image);
-		card.appendChild(title);
-		card.appendChild(date);
-		card.appendChild(button);
+    const dateElement = document.createElement('p');
+    dateElement.innerHTML = `Добавлено: <span>${getDayInfo(date)}</span>`;
+    dateElement.classList.add('product-card__date');
 
-	
-        document.getElementById(`${product.type}-container`).appendChild(card)
-	});
+    const button = document.createElement('button');
+    button.textContent = 'Купить';
+    button.classList.add('product-card__button');
+    button.addEventListener('click', openForm);
+
+    card.appendChild(image);
+    card.appendChild(titleElement);
+    card.appendChild(dateElement);
+    card.appendChild(button);
+
+    productContainers[type].appendChild(card);
+  });
 }
 
 createProductCards();
-
